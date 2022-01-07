@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo } from "react";
+import Button from "@mui/material/Button";
+import Tuner from "./components/Tuner";
+import { PlayCircleOutline, StopCircle } from "@mui/icons-material";
 
 function App() {
+  const [show, setShow] = React.useState(false);
+
+  const buttonVariant = useMemo(() => !show ? "contained" : "outlined", [show]);
+  const buttonColor = useMemo(() => !show ? "primary" : "error", [show]);
+  const buttonIcon = useMemo(() => !show ? <PlayCircleOutline /> : <StopCircle />, [show]);
+
+  const handleClick = () => { setShow((prevState) => !prevState); }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Tuner isStarted={show} />
+      <Button 
+        variant={buttonVariant}
+        color={buttonColor}
+        startIcon={buttonIcon}
+        onClick={() => handleClick()}
+      >
+        Start tunning
+      </Button>
     </div>
   );
 }
