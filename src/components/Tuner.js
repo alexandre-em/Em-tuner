@@ -17,7 +17,7 @@ import { Content, Note, Progressbar, Main } from './Tuner.style'
  * @returns {JSX.Element}
  * @constructor
  */
-export default function Tuner({ show, onStart, onClose }) {
+export default function Tuner({ show=true, onStart, onClose }) {
   const [frequenciesBST, closestValue] = useFrequency();
   const [cv, setCv] = useState()
   const [note, setNote] = useState('');
@@ -64,7 +64,7 @@ export default function Tuner({ show, onStart, onClose }) {
   if (!show) return <></>
 
   return (
-    <Main>
+    <Main data-test='tuner'>
       <Content>
         <Progressbar backgroundColor={backgroundColor}>
           <div className="tuner__progress" style={{

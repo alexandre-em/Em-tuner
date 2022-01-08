@@ -15,7 +15,7 @@ function App() {
       </Paper>
       <Footer href="https://github.com/alexandre-em/Em-tuner">
         <GitHub fontSize="large" />
-        <Typography variant="h7" color="text.secondary" style={{ textAlign: 'center' }} >Code</Typography>
+        <Typography variant="h7" color="text.secondary" style={{ textAlign: 'center' }}>Code</Typography>
       </Footer>
     </Main>
   );
