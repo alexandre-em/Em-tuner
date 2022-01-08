@@ -19,7 +19,7 @@ const Content = styled.div`
 const Progressbar = styled.div(({ backgroundColor }) => ({
   backgroundColor,
   position: 'relative',
-  width: '80%',
+  width: '90%',
   height: 80,
   borderRadius: 100,
   display: 'flex',
@@ -29,6 +29,7 @@ const Progressbar = styled.div(({ backgroundColor }) => ({
   boxShadow: '10px 10px 21px -7px rgba(0, 0, 0, 0.2)',
   WebkitBoxShadow: '10px 10px 21px -7px rgba(0, 0, 0, 0.2)',
   MozBoxShadow: '10px 10px 21px -7px rgba(0, 0, 0, 0.2)',
+  margin: 20,
 }));
 
 const Progress = styled.div(({ progress }) => ({

@@ -65,7 +65,6 @@ export default function Tuner({ show, onStart, onClose }) {
 
   return (
     <Main>
-      <h2>Em Tuner</h2>
       <Content>
         <Progressbar backgroundColor={backgroundColor}>
           <div className="tuner__progress" style={{
