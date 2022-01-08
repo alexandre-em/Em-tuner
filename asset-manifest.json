@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Em-tuner/static/css/main.cd27f19b.chunk.css",
-    "main.js": "/Em-tuner/static/js/main.60071232.chunk.js",
+    "main.js": "/Em-tuner/static/js/main.f746b003.chunk.js",
     "runtime-main.js": "/Em-tuner/static/js/runtime-main.465d2ab9.js",
-    "static/js/2.58eed038.chunk.js": "/Em-tuner/static/js/2.58eed038.chunk.js",
+    "static/js/2.37d4eea7.chunk.js": "/Em-tuner/static/js/2.37d4eea7.chunk.js",
     "index.html": "/Em-tuner/index.html",
-    "static/js/2.58eed038.chunk.js.LICENSE.txt": "/Em-tuner/static/js/2.58eed038.chunk.js.LICENSE.txt"
+    "static/js/2.37d4eea7.chunk.js.LICENSE.txt": "/Em-tuner/static/js/2.37d4eea7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.465d2ab9.js",
-    "static/js/2.58eed038.chunk.js",
+    "static/js/2.37d4eea7.chunk.js",
     "static/css/main.cd27f19b.chunk.css",
-    "static/js/main.60071232.chunk.js"
+    "static/js/main.f746b003.chunk.js"
   ]
 }
