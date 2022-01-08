@@ -61,7 +61,7 @@ const pitchDetection = (audioContext, stream, setFrequency) => {
       pitch.getPitch(getPitch);
     }
   }
-  const url = '/models/';
+  const url = 'models/';
   const pitch = pitchDetect(url, audioContext, stream, modelLoaded);
 };
 

@@ -3,8 +3,7 @@ import styled from '@emotion/styled';
 const Footer = styled.a`
 	position: absolute;
 	bottom: 10px;
-	left: 50%;
-	right: 50%;
+	right: 10px;
 	display: flex;
 	flex-direction: column;
 	alignItems: center;
