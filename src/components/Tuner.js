@@ -1,35 +1,52 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types';
-import { useFrequency, usePitch } from 'hooks';
+import { PlayCircleOutline, StopCircle } from "@mui/icons-material";
+import { Button } from '@mui/material';
 
+import useFrequency from 'hooks/useFrequency';
+import { setup, closeChanges } from 'utils/PitchDetection';
 import { Content, Note, Progressbar, Main } from './Tuner.style'
 
-export default function Tuner({ isStarted, onStart, onClose }) {
+/**
+ * @description A component that use user's mic to check the tuning
+ * @author <a href="mailto:alexandre.em@pm.me">Alexandre Em</a>
+ * @param {boolean} show
+ * @param {() => void} onStart
+ * @param {() => void} onClose
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export default function Tuner({ show, onStart, onClose }) {
   const [frequenciesBST, closestValue] = useFrequency();
-  const { state: { frequency, isUsed }, closeChanges, setIsUsed, setup } = usePitch();
   const [cv, setCv] = useState()
   const [note, setNote] = useState('');
   const [progress, setProgress] = useState(0);
+  const [frequency, setFrequency] = useState();
+  const [isStarted, setIsStarted] = React.useState(false);
+
+  const buttonVariant = useMemo(() => !isStarted ? "contained" : "outlined", [isStarted]);
+  const buttonColor = useMemo(() => !isStarted ? "primary" : "error", [isStarted]);
+  const buttonIcon = useMemo(() => !isStarted ? <PlayCircleOutline /> : <StopCircle />, [isStarted]);
+
+  const handleClick = useCallback(() => {
+    if (!isStarted) {
+      setup(setFrequency).then(() => {
+        setIsStarted(true);
+        if (onStart) onStart();
+      });
+    }
+    if (isStarted) {
+      closeChanges().then(() => {
+        setIsStarted(false);
+        if (onClose) onClose();
+      })
+    }
+  }, [isStarted, onClose, onStart]);
 
   const backgroundColor = React.useMemo(() => {
-    return `hsl(${Math.abs(100 - progress)}deg, 55%, 65%)`;
+    return `hsl(${Math.abs(120 - progress)}deg, 55%, 65%)`;
   }, [progress]);
-
-  useEffect(() => {
-    if (isStarted){
-      setIsUsed(true);
-      setup().then(onStart);
-    } 
-    if (!isStarted && isUsed) {
-      setIsUsed(false);
-      closeChanges().then(onClose);
-    }
-  }, [isStarted, isUsed]);
-
-  useEffect(() => {
-    return () => closeChanges().then(onClose);
-  }, [])
 
   useEffect(() => {
     if (frequency && isStarted) {
@@ -44,6 +61,8 @@ export default function Tuner({ isStarted, onStart, onClose }) {
     }
   }, [frequency, isStarted]);
 
+  if (!show) return <></>
+
   return (
     <Main>
       <h2>Em Tuner</h2>
@@ -54,24 +73,32 @@ export default function Tuner({ isStarted, onStart, onClose }) {
             height: '100%',
             ...((progress > 0) && { borderRight: '.25vw solid red' }),
             ...((progress < 0) && { borderLeft: '.25vw solid red' }),
-          }}/>
+          }} />
+          <Note>
+            <h1>{note ? `${note}` : '-/-'}</h1>
+          </Note>
         </Progressbar>
-        <Note>
-          <h1>{note ? `${note}` : '-/-'}</h1>
-        </Note>
+        <Button
+          variant={buttonVariant}
+          color={buttonColor}
+          startIcon={buttonIcon}
+          onClick={() => handleClick()}
+        >
+          {!isStarted ? 'Start' : 'Stop'} tunning
+        </Button>
       </Content>
     </Main>
   )
 }
 
 Tuner.propTypes = {
-  isStarted: PropTypes.bool,
+  show: PropTypes.bool,
   onStart: PropTypes.func,
   onClose: PropTypes.func,
 }
 
 Tuner.defaultProps = {
-  isStarted: true,
+  show: true,
   onStart: () => null,
   onClose: () => null,
 }

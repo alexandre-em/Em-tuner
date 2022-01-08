@@ -18,13 +18,13 @@ const Content = styled.div`
 
 const Progressbar = styled.div(({ backgroundColor }) => ({
   backgroundColor,
+  position: 'relative',
   width: '80%',
   height: 80,
   borderRadius: 100,
   display: 'flex',
   justifyContent: 'center',
-  borderWidth: 2,
-  borderColor: '#fff',
+  border: '2px solid white',
   color: 'rgb(76, 150, 76)',
   boxShadow: '10px 10px 21px -7px rgba(0, 0, 0, 0.2)',
   WebkitBoxShadow: '10px 10px 21px -7px rgba(0, 0, 0, 0.2)',
@@ -39,8 +39,9 @@ const Progress = styled.div(({ progress }) => ({
 }));
 
 const Note = styled.div`
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  top: 25%;
+  color: white;
 `;
 
 export { Content, Note, Progress, Progressbar, Main }
