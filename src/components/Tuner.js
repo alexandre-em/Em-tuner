@@ -9,21 +9,26 @@ import { setup, closeChanges } from 'utils/PitchDetection';
 import { Content, Note, Progressbar, Main } from './Tuner.style'
 
 /**
+ * @callback TunerCallback
+ * @returns {void}
+ */
+
+/**
+ * @function Tuner
  * @description A component that use user's mic to check the tuning
- * @author <a href="mailto:alexandre.em@pm.me">Alexandre Em</a>
- * @param {boolean} show
- * @param {() => void} onStart
- * @param {() => void} onClose
+ * @param {boolean} [show=true]
+ * @param {TunerCallback} onStart
+ * @param {TunerCallback} onClose
  * @returns {JSX.Element}
  * @constructor
  */
 export default function Tuner({ show=true, onStart, onClose }) {
-  const [frequenciesBST, closestValue] = useFrequency();
+  const { frequenciesBST, closestValue } = useFrequency();
   const [cv, setCv] = useState()
   const [note, setNote] = useState('');
   const [progress, setProgress] = useState(0);
   const [frequency, setFrequency] = useState();
-  const [isStarted, setIsStarted] = React.useState(false);
+  const [isStarted, setIsStarted] = useState(false);
 
   const buttonVariant = useMemo(() => !isStarted ? "contained" : "outlined", [isStarted]);
   const buttonColor = useMemo(() => !isStarted ? "primary" : "error", [isStarted]);
@@ -44,7 +49,7 @@ export default function Tuner({ show=true, onStart, onClose }) {
     }
   }, [isStarted, onClose, onStart]);
 
-  const backgroundColor = React.useMemo(() => {
+  const backgroundColor = useMemo(() => {
     return `hsl(${Math.abs(120 - progress)}deg, 55%, 65%)`;
   }, [progress]);
 
@@ -83,7 +88,7 @@ export default function Tuner({ show=true, onStart, onClose }) {
           startIcon={buttonIcon}
           onClick={() => handleClick()}
         >
-          {!isStarted ? 'Start' : 'Stop'} tunning
+          {!isStarted ? 'Start' : 'Stop'} tuning
         </Button>
       </Content>
     </Main>

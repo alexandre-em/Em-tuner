@@ -35,8 +35,8 @@ export default function useFrequency() {
 
     /**
      * A Binary tree class implementation
+     * @class
      * @param {number} val 
-     * @author <a href="mailto:alexandre.em@pm.me">Alexandre Em</a>
      */
     function TreeNode(val) {
         this.val = val;
@@ -46,7 +46,6 @@ export default function useFrequency() {
     /**
      * Convert an array of frequencies to a binary tree
      * @param {Array<{ frequency: number, note: string }>} frequencies Array of frequencies
-     * @author <a href="mailto:alexandre.em@pm.me">Alexandre Em</a>
      * @returns Binary tree of the frequencies
      */
     const toBST = (frequencies) => {
@@ -70,7 +69,6 @@ export default function useFrequency() {
 
     /**
      * @description Compute the closest note of a frequency `val`
-     * @author <a href="mailto:alexandre.em@pm.me">Alexandre Em</a>
      * @param {TreeNode} tree Binary tree
      * @param {number} val Frequency to compare
      * @returns The closest note
@@ -92,6 +90,11 @@ export default function useFrequency() {
         }
     }
 
-    return [frequenciesBST, closestValue];
+    return {
+        TreeNode,
+        toBST,
+        frequenciesBST,
+        closestValue,
+    };
 }
 
